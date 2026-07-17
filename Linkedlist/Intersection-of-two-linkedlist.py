@@ -7,3 +7,4 @@ class Solution:
             p2 = p2.next if p2 else headA
         
         return p1
+    
