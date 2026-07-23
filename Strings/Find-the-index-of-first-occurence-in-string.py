@@ -3,6 +3,7 @@ class Solution:
         n = len(haystack)
         m = len(needle)
 
+
         for i in range(n - m + 1):
             found = True
 
