@@ -19,3 +19,4 @@ class Stack:
      return len(self.stack)
     def display(self):
      print(self.stack)
+   
