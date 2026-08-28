@@ -12,4 +12,5 @@ class Boat:
         self.maximum_speed = maximum_speed
 
     def __str__(self):
+        
         return f"Boat with the maximum speed of {self.maximum_speed} knots"
