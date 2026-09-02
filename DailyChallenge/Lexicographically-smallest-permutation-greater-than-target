@@ -1,0 +1,42 @@
+from collections import Counter
+
+class Solution(object):
+    def lexGreaterPermutation(self, s, target):
+        """
+        :type s: str
+        :type target: str
+        :rtype: str
+        """
+        n = len(s)
+        count = Counter(s)
+
+        # 1. target ka prefix match karo jitna ho sake
+        matched = 0
+        while matched < n:
+            c = target[matched]
+            if count[c] == 0:
+                break
+            count[c] -= 1
+            matched += 1
+
+        # 2. sabse aage wale matched position se peeche jao,
+        #    jahan target[pos] se bada letter available ho wahan place karo
+        for pos in range(min(matched, n - 1), -1, -1):
+            if pos < matched:
+                count[target[pos]] += 1  # restore, kyunki yahan se try kar rahe
+
+            found = None
+            for code in range(ord(target[pos]) + 1, ord('z') + 1):
+                ch = chr(code)
+                if count.get(ch, 0) > 0:
+                    found = ch
+                    break
+
+            if found:
+                count[found] -= 1
+                remaining = []
+                for ch in sorted(count.keys()):
+                    remaining.extend([ch] * count[ch])
+                return target[:pos] + found + ''.join(remaining)
+
+        return ""
